@@ -98,6 +98,9 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	$fileUploadElement->addValidator('extension', false, 'xml');
     	$form->addElement($fileUploadElement);
     	
+    	//CSV import inputs
+		
+    	
     	//Submit button
     	$form->addElement('submit','submit');
     	$submitElement=$form->getElement('submit');
