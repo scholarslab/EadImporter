@@ -1,7 +1,7 @@
 <?php
 
 function extract_documents(String $ead) {
-	$xh = xslt_create(EAD_IMPORT_DOC_EXTRACTOR);
+	$xh = new XSLTProcessor(EAD_IMPORT_DOC_EXTRACTOR);
 	return xslt_process($xh, $ead);
 }
 

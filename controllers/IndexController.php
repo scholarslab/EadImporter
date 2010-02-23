@@ -1,16 +1,13 @@
 <?php
 
-class EadImport_IndexController extends CsvImport_IndexController
+class EadImporter_IndexController extends Omeka_Controller_Action
 {
     public function indexAction() 
     {
-        // get the session and view
-        $eadImportSession = new Zend_Session_Namespace('EadImport');
-        $view = $this->view;
+		$form = $this->getUpdateForm();
+		$this->view->form = $form;      
         
-        // check the form submit button
-        $view->err = '';
-        if (isset($_POST['ead_import_submit'])) {
+      /*  if (isset($_POST['ead_import_submit'])) {
             //make sure the user selected a file
             if (empty($_POST['ead_import_file_name'])) {
                 $view->err = 'Please select a file to import.';
@@ -27,11 +24,91 @@ class EadImport_IndexController extends CsvImport_IndexController
                     $this->redirect->goto('select-extracts');   
               //  }                
             }
-        }
-        
+        }*/
+
     }
     
-    public function selectExtractsAction()
+    public function updateAction()
+    {
+		
+    	$form = $this->getUpdateForm();
+    	
+    	if($_POST){
+    		if($form->isValid($_POST)){
+    			//Save the file
+    			$uploadedData = $form->getValues();
+    			$filename = $uploadedData["eaddoc"];
+    			$this->view->filename = $filename;						
+    			$form->eaddoc->receive();
+    			$process = $this->processEad($filename);
+    		}
+    		else
+    		{
+    			$this->view->form = $form;
+    		}
+    	}
+    	else {
+    		$this->view->form = $form;
+    	}
+	}
+	
+	private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION){
+		$xp = new XsltProcessor();
+		$file = $tmpdir . DIRECTORY_SEPARATOR . $filename;
+
+		 // create a DOM document and load the XSL stylesheet
+		$xsl = new DomDocument;
+		$xsl->load($stylesheet);
+  
+		// import the XSL styelsheet into the XSLT process
+		$xp->importStylesheet($xsl);
+		
+		// create a DOM document and load the XML data
+		$xml_doc = new DomDocument;
+		$xml_doc->load($file);
+		
+		  // dump text to screen
+		if ($doc = $xp->transformToXML($xml_doc)) {
+			echo $doc;
+			#$doc->save('temp.csv');
+		} else {
+			trigger_error('XSL transformation failed.', E_USER_ERROR);
+		} // if 
+		
+		
+		echo $file . '<br/>';
+		echo $stylesheet;
+		
+	}
+	
+	private function getUpdateForm($tmpdir=EAD_IMPORT_TMP_LOCATION)
+	{
+	    require "Zend/Form/Element.php";
+    
+	    //$path = EAD_IMPORT_TMP_LOCATION;
+    	$form = new Zend_Form();
+    	$form->setAction('update');
+    	$form->setMethod('post');
+    	$form->setAttrib('enctype', 'multipart/form-data');
+
+    	$fileUploadElement = new Zend_Form_Element_File('eaddoc');
+    	$fileUploadElement->setLabel('Select EAD file:');
+    	$fileUploadElement->setDestination($tmpdir);
+    	$fileUploadElement->addValidator('count', false, 1); 
+    	$fileUploadElement->addValidator('extension', false, 'xml');
+    	$form->addElement($fileUploadElement);
+    	
+    	//Submit button
+    	$form->addElement('submit','submit');
+    	$submitElement=$form->getElement('submit');
+    	$submitElement->setLabel('Upload EAD Document');
+    	
+    	//$this->view->form = $form;
+    	//echo $tmpdir;
+    	return $form;
+	}
+    
+   /* public function selectExtractsAction()
     {
         // get the session and view
         $eadImportSession = new Zend_Session_Namespace('EadImport');
@@ -75,7 +152,7 @@ class EadImport_IndexController extends CsvImport_IndexController
                 $this->redirect->goto('status');
                 
             }  
-        }   
+        }   */
     
     public function statusAction() 
     {

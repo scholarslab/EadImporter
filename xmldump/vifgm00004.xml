@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="http://ead.lib.virginia.edu/vivaead/published/document.xsl" type="text/xsl"?>
+<!DOCTYPE 
+ead SYSTEM "http://text.lib.virginia.edu/bin/dtd/eadVIVA/eadVIVA.dtd"
+[
+<!ENTITY % xmlchar "INCLUDE">
+<!ENTITY logo SYSTEM "http://ead.lib.virginia.edu/vivaead/logos/gmu.jpg" NDATA jpeg>
+<!ENTITY conditions SYSTEM "http://www.lib.virginia.edu/vhp/conditions.html" NDATA html>
+<!ENTITY address SYSTEM "http://ead.lib.virginia.edu/vivaead/add_con/gmu_address.xml">
+<!ENTITY contact SYSTEM "http://ead.lib.virginia.edu/vivaead/add_con/gmu_contact.xml">
+]>
+<ead id="vifgm00004">
+   <eadheader audience="internal" langencoding="iso639-2b"
+   findaidstatus="edited-full-draft" scriptencoding="iso15924"
+   dateencoding="iso8601" countryencoding="iso3166-1"
+   repositoryencoding="iso15511">
+      <eadid publicid="PUBLIC &amp;#34;-//George Mason University::Fenwick Library::Special Collections and Archives//TEXT (US::ViFGM::vifgm00004::A Guide to Porgy and Bess: A Contemporary Collection of Posters from the1950s)//EN&amp;#34; &amp;#34;vifgm00004.xml&amp;#34;"
+             countrycode="US" mainagencycode="ViFGM">PUBLIC "-//George
+             Mason University::Fenwick Library::Special Collections and
+             Archives//TEXT (US::ViFGM::vifgm00004::A Guide to Porgy
+             and Bess: A Contemporary Collection of Posters from the
+             1950s)//EN" "vifgm00004.xml"</eadid>
+      <filedesc>
+         <titlestmt>
+            <titleproper>A Guide to Porgy and Bess: A Contemporary
+            Collection of Posters from the 1950s</titleproper>
+            <subtitle id="sort">Porgy and Bess: A Contemporary
+            Collection of Posters from the 1950s 
+            <num type="collectionnumber">Porgy and Bess
+            001</num></subtitle>
+            <author>Special Collections Staff</author>
+         </titlestmt>
+         <publicationstmt>
+            <publisher>Copyright George Mason University
+            Libraries</publisher>
+            <address>
+               <addressline>Special Collections &amp;
+               Archives</addressline>
+               <addressline>Fenwick Library (2FL)</addressline>
+               <addressline>George Mason University</addressline>
+               <addressline>Fairfax, Virginia 22030-4444</addressline>
+               <addressline>USA</addressline>
+               <addressline>Phone: (703) 993-2220</addressline>
+               <addressline>Fax: (703) 993-2669</addressline>
+               <addressline>Email: speccoll@gmu.edu</addressline>
+               <addressline>URL:
+               http://www.gmu.edu/library/specialcollections</addressline>
+            </address>
+            <date type="publication">&#169; 2000 By Copyright
+            George Mason University Libraries.</date>
+            <p id="usestatement">
+               <extref entityref="conditions">Conditions of
+               Use</extref>
+            </p>
+            <p id="filesize">22 Kb</p>
+         </publicationstmt>
+      </filedesc>
+      <profiledesc>
+         <creation>Machine-readable finding aid derived from ProCite
+         database 
+         <date>2000</date></creation>
+         <langusage>Description is in 
+         <language>English</language></langusage>
+      </profiledesc>
+      <revisiondesc>
+         <change>
+            <date normal="2004-02-19">Feb 19, 2004</date>
+            <item>PUBLIC "-//George Mason University::Fenwick
+            Library::Special Collections and Archives//TEXT
+            (US::ViFGM::vifgm00004::A Guide to Porgy and Bess: A
+            Contemporary Collection of Posters from the 1950s)//EN"
+            "vifgm00004.xml" converted from EAD 1.0 to 2002 by
+            v1to02.xsl (sy2003-10-15).</item>
+         </change>
+         <change>
+            <date normal="2004-02-25">Feb 25, 2004</date>
+            <item>converted to conform to eadVIVA.dtd by
+            vivastrict.xsl</item>
+         </change>
+      </revisiondesc>
+   </eadheader>
+   <frontmatter>
+      <titlepage>
+         <titleproper>A Guide to Porgy and Bess: A contemporary
+         Collection of Posters from the 1950s 
+         <date>2000</date></titleproper>
+         <subtitle>A Collection in 
+         <lb />Special Collections and Archives 
+         <num type="Collection Number">Porgy and Bess
+         001</num></subtitle>
+         <p id="logostmt">
+            <extptr actuate="onload" show="embed" entityref="logo" />
+         </p>
+         <publisher>George Mason University Libraries</publisher>
+         <date type="publication">2000</date>
+         <list type="simple">
+            <head>Contact Information:</head>
+            <item>Fenwick Library (2FL)</item>
+            <item>George Mason University</item>
+            <item>Fairfax, Virginia 22030-4444</item>
+            <item>USA</item>
+            <item>Phone: (703) 993-2220</item>
+            <item>Fax: (703) 993-2669</item>
+            <item id="email">Email: 
+            <extref href="mailto:speccoll@gmu.edu">
+            speccoll@gmu.edu</extref></item>
+            <item>URL: 
+            <extref href="http://www.gmu.edu/library/specialcollections">
+            http://www.gmu.edu/library/specialcollections</extref></item>
+         </list>
+         <list type="deflist">
+            <defitem>
+               <label>Processed by:</label>
+               <item>Special Collections and Archives Staff</item>
+            </defitem>
+            <defitem>
+               <label>Funding:</label>
+               <item>Web version of the finding aid funded in part by a
+               grant from the National Endowment for the
+               Humanities.</item>
+            </defitem>
+         </list>
+      </titlepage>
+   </frontmatter>
+   <archdesc level="collection">
+      <runner placement="footer">Special Collections and Archives,
+      George Mason University Libraries</runner>
+      <did>
+         <head>Descriptive Summary</head>
+         <repository>Special Collections and Archives, George Mason
+         University</repository>
+         <unittitle label="Title">Porgy and Bess: A Collection of
+         Posters from the 1950s</unittitle>
+         <unitid label="Collection number">Porgy and Bess 001</unitid>
+         <physdesc label="Physical Characteristics">60
+         posters</physdesc>
+         <langmaterial label="Language">
+            <language langcode="eng">English</language>
+         </langmaterial>
+      </did>
+      <descgrp type="admininfo">
+         <head>Administrative Information</head>
+         <accessrestrict>
+            <head>Access</head>
+            <p>There are no restrictions.</p>
+         </accessrestrict>
+         <userestrict>
+            <head>Use Restrictions</head>
+            <p>There are no restrictions.</p>
+         </userestrict>
+         <prefercite>
+            <head>Preferred Citation</head>
+            <p>Porgy and Bess: A Collection of Posters from the 1950s,
+            Special Collections &amp; Archives, George Mason University
+            Libraries</p>
+         </prefercite>
+      </descgrp>
+      <bioghist>
+         <head>Biographical/Historical Information</head>
+         <p>Porgy and Bess was a three act "folk Opera" produced by The
+         Theatre Guild at the Alvin Theatre, New York City, in 1927.
+         The Opera was taken directly from a book by Dubose Heyward
+         titled Porgy, with lyrics and music by Ira and George
+         Gershwin. The opera revolves around Porgy, a
+         physically-challenged African-American black beggar who lives
+         and works in a Charleston tenement called Catfish Row and who
+         loves the beautiful but weak-willed Bess. Bess is the mistress
+         of the vicious Crown, but when Crown flees after murdering a
+         man, she goes to live with Porgy. On Crown's return porgy
+         fights with him and kills him. Porgy is taken to jail, and
+         while there Bess is lured away by the drug peddler, Sportin'
+         Life. When Porgy gets out of jail, he leaves Catfish Row to
+         find Bess. This is where the play ends. The play remains one
+         of the greatest of all American folk dramas.</p>
+         <p>Robert Breen was the first Person to arrange postwar United
+         States and Soviet cultural "changes. He also helped to bring
+         federal financing to the performing arts. His greatest success
+         was on the international stage in 1952. He directed and
+         co-produced with Blevins Davis the critically acclaimed
+         revival of Porgy and Bess. It toured twenty-nine countries in
+         four years. The following is a brief account of the opera's
+         successful tours through North and South America and
+         Europe.</p>
+         <p>The United States performances began in Chicago and had a
+         slow start because of the summer heat and the preoccupation
+         with the Republican National Convention. But, before long the
+         tour became a huge success. Critics called the performances of
+         Porgy and Bess, "the best sung version yet,"' and by the end
+         of their stay in Chicago the cast was performing to standing
+         room only crowds.</p>
+         <p>From Chicago, the troupe traveled to Vienna, Austria for
+         the opening of their European tour on September 7, 1952. In
+         the past, Vienna had never been very receptive to American
+         opera, but after Porgy and Bess, attitudes changed
+         dramatically. The crowds went wild: they had never seen
+         anything like it before in a theater. The next stop was Berlin
+         and there, too, the audiences loved Porgy and Bess. It became
+         the main event for a month-long festival. The reactions of the
+         audiences were extraordinary, even though many could not
+         understand what was being spoken or sung.</p>
+         <p>Europeans were not the only ones to notice the amazing
+         success of Porgy and Bess. In the United States people were
+         also taking notice of Porgy and Bess, including President
+         Dwight Eisenhower. He created an emergency fund with an annual
+         appropriation of five million dollars. This fund was used to
+         finance and promote "American" cultural activities, such as
+         Porgy and Bess. Half the money went to theater productions.
+         The economics of production demanded full houses, so when
+         there was a period of empty seats in Europe, Billy Rose
+         proposed bringing the tour home to the United States. But
+         before going home, they traveled to Paris for one last
+         performance. The reactions were the same as in Vienna and
+         Berlin. Gendarmes were needed to keep those without tickets
+         from crashing the gates. Critics called Porgy and Bess, "A
+         masterpiece ... one doesn't have to say more. ,2 After Paris,
+         the troupe returned to perform at the Ziegfeld Theatre in New
+         York City. While there, the cast performed 305 shows and while
+         still in New York, the popularity of Porgy and Bess picked up
+         in Europe. The troupe was invited to revisit Paris, intending
+         to stay only three weeks, but demand kept the opera performing
+         for an additional seven weeks. From Paris, the opera moved to
+         Zagreb, Yugoslavia. This was the first time American singers
+         were invited behind the Iron Curtain.</p>
+         <p>Their next stop was Egypt, first Alexandria and then Cairo.
+         The first performance in Alexandria was on New Year's Eve, and
+         critics were skeptical about the shows success, but the cast
+         played to a packed house, while hundreds more were turned
+         away. From Alexandria, they traveled to Cairo, where, once
+         again, they were a huge success. Next, the troupe traveled to
+         Tel Aviv, Israel, where they performed eight shows at the
+         Habimah Theatre. People literally tackled the ticket takers so
+         that they could get inside the theater.</p>
+         <p>From Israel, the opera traveled to Barcelona, Spain. Here,
+         they performed for ten days, and critics called Porgy and Bess
+         "the best thing seen in Barcelona in twenty years."' From
+         there they traveled to Italy, first to Milan and the
+         world-renowned Teatro Alla Scala. For many in the cast it was
+         a lifelong dream to perform in the Teatro Alla Scala. They did
+         not let anyone down -- they performed as never before. It was
+         the first time an American company had been invited to one of
+         the world's premier opera houses. After Milan, the cast
+         performed in Genoa and Florence, Lausanne, Marseilles, and
+         back to Italy to perform in Turin and Rome. After Italy, they
+         traveled to Zurich, and finished this leg of the European tour
+         in Brussels and Antwerp.</p>
+         <p>The troupe then changed direction, traveling south to Rio
+         de Janeiro, and Lima. The audiences in South America thought
+         Porgy and Bess was a revelation, and worthy of unrestricted
+         applause.</p>
+         <p>From South America, they went to the Soviet Union, first
+         Leningrad and then Moscow. There were some misunderstandings
+         on opening night in Leningrad because audiences had trouble
+         understanding things such as the buzzard over Porgy's abode
+         and the open attitudes about sexual passion. The Russians
+         appeared to suffer from culture shock. By the end of the
+         Leningrad tour, however, the cast was once again a huge
+         success and played to full houses and enthusiastic audiences.
+         Next, they appeared in Moscow where the cast felt more
+         comfortable because the theater audiences were more accepting
+         than the ones in Leningrad. On the second night the cast was
+         honored by the attendance of the three most important Soviet
+         politicians: Nikita Khrushchev, Nikolai Bulganin, and
+         Vyacheslav Molotov. This was a rare occurrence because the
+         leaders rarely attended public performances: when they did, it
+         had always been on the last night.</p>
+         <p>The next stops were again behind the Iron Curtain, Warsaw,
+         and Prague. The performances were a huge success and once
+         again tickets sold out before the performances began. After
+         the troupe left Warsaw and Prague, they traveled to Germany,
+         where they performed in Munich, Stuttgart, Dtisseldorf, and
+         Hamburg. From Germany they traveled to Rotterdam, Netherlands,
+         Aachus, Denmark and back to the Netherlands, this time in
+         Amsterdam, where the tour ended on June 3, 1956.</p>
+      </bioghist>
+      <arrangement>
+         <head>Arrangement</head>
+         <p>Posters are arranged alphabetically according to the
+         country where the performances were held.</p>
+      </arrangement>
+      <dsc type="combined">
+         <head>Contents List</head>
+         <c01 level="series">
+            <did>
+               <unittitle>Porgy and Bess Posters</unittitle>
+            </did>
+            <c02 level="item">
+               <did>
+                  <unittitle>Antwerp, Belgium: Hippodrome
+                  Theatre</unittitle>
+                  <unitdate>June 23-30, 1955</unitdate>
+                  <physdesc>22"x14"; Vertical; black background with
+                  yellow lettering; white squares with black lettering;
+                  white border</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Antwerp, Belgium: Hippodrome
+                  Theater</unittitle>
+                  <unitdate>June 23-30,1955</unitdate>
+                  <physdesc>34"x24"; Large black background with bright
+                  yellow lettering; white squares with black lettering;
+                  white border</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Antwerp, Belgium: Hippodrome
+                  Theater</unittitle>
+                  <unitdate>June 23-30,1955</unitdate>
+                  <physdesc>31"x96"; Black background with white
+                  squares and black lettering; large bright yellow
+                  lettering in the middle of "Porgy and
+                  Bess".</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Brussels, Belgium: Theatre de la
+                  Monnaie</unittitle>
+                  <unitdate>June 23-30,1955</unitdate>
+                  <physdesc>32"x24"; Black background with white
+                  squares and black lettering; off white border; large
+                  lemon yellow letters in middle; yellow square at top
+                  with black lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Rio de Janeiro, Brazil: Brazil Teatro
+                  Municipal</unittitle>
+                  <unitdate>July 7-13,1955</unitdate>
+                  <physdesc>60"x92"; Four pieces; bright red background
+                  with off white border and white lettering inside of
+                  it</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Prague, Czechoslovakia: Kerlin
+                  Theatre</unittitle>
+                  <unitdate>February 11-19,1956</unitdate>
+                  <physdesc>34"x24"; Washed out off-white background;
+                  small black lettering, larger bold red lettering; on
+                  the left side there is a square with the words "Porgy
+                  and Bess".</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Prague, Czechoslovakia: Kerlin
+                  Theatre</unittitle>
+                  <unitdate>February 11-19,1956</unitdate>
+                  <physdesc>42"x31"; Salmon colored fibrous paper with
+                  black charted lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Arhus, Denmark: Aarhushallen</unittitle>
+                  <unitdate>May 9-16,1956</unitdate>
+                  <physdesc>33"x25"; White background in middle with
+                  lime-green lettering and black writing;black and
+                  white photographs taken from characters and scenes of
+                  the play act as the boder.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Alexandria, Egypt: Theatre Mohamad Aly 
+                  <unitdate>December 31,1954-January 2,
+                  1955</unitdate></unittitle>
+                  <physdesc>69"x36"; White background; blue border with
+                  white starts; blue and red lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Alexandria, Egypt: Theatre Mohamad Aly 
+                  <unitdate>December 31,1954-January 2,
+                  1955</unitdate></unittitle>
+                  <physdesc>12"x8"; Small washed out cream-color
+                  background; black border with red and black
+                  lettering; two star illustrations on either
+                  side</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Cairo, Egypt: Theatre De'L Opera 
+                  <unitdate>January 7-12,1955</unitdate></unittitle>
+                  <physdesc>11"x8"; Washed out brown background; red
+                  and black lettering; four different
+                  versions</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Cairo, Egypt: Theatre De'L Opera 
+                  <unitdate>January 7-12, 1955</unitdate></unittitle>
+                  <physdesc>69"x36"; White background; blue star
+                  border; blue and red lettering; Egyptian lettering at
+                  top.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Marseilles, France: Opera Municpal 
+                  <unitdate>March 26-April
+                  4,1955</unitdate></unittitle>
+                  <physdesc>18"x12"; Off-white background;red and blue
+                  lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Marseilles, France: Opera Municpal 
+                  <unitdate>March 26-April
+                  4,1955</unitdate></unittitle>
+                  <physdesc>55"x36"; Large; bright purple with black
+                  lettering.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Paris, France: Theatre De'L Empire 
+                  <unitdate>February 16-March
+                  1,1953</unitdate></unittitle>
+                  <physdesc>24"x16"; Green backround with black and
+                  white lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Paris, France: Theatre De'L Empire 
+                  <unitdate>September 30-December
+                  4,1954</unitdate></unittitle>
+                  <physdesc>64"x94",48"x34"; Large;green background
+                  with large black lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Paris, France: Theatre De'L Empire 
+                  <unitdate>September 30-December
+                  4,1954</unitdate></unittitle>
+                  <physdesc>24"x16"; Vertical;dark green background
+                  with white border;large bold black
+                  lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Paris, France: Theatre De'L Empire 
+                  <unitdate>September 30-December
+                  4,1954</unitdate></unittitle>
+                  <physdesc>59"x40",59"x37"; Green background; large
+                  black lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Berlin,Germany: Titania Palast 
+                  <unitdate>September 18-27,1952</unitdate></unittitle>
+                  <physdesc>23"x33"; Off-white background with blue
+                  sketch-like illustration of village; magenta and
+                  black lettering through the center</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Dusseldorf,Germany: Apolla Theatre 
+                  <unitdate>November 18-22,1955</unitdate></unittitle>
+                  <physdesc>24"x34"; Lemon yellow background with
+                  orenge border on the top and bottom; orange and black
+                  lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Dusseldorf,Germany: Apolla Theatre 
+                  <unitdate>November 18-22,1955</unitdate></unittitle>
+                  <physdesc>24"x34"; White background with black
+                  lettering; blue patch with Porgy and Bess written in
+                  yellow in the middle</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Frankfort,Germany: Stadtischen Buhnen 
+                  <unitdate>November 25-27,1955</unitdate></unittitle>
+                  <physdesc>24"x33"; White background with black
+                  lettering; blue patch of color in middle with "Porgy
+                  and Bess" written in bright yellow</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Franfort,Germany: Stadtischen Buhnen 
+                  <unitdate>November 25-27,1955</unitdate></unittitle>
+                  <physdesc>24"x34"; Lemon yellow background; black
+                  border on sides; orange border on top and bottom;
+                  black and orange lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Hamburg,Germany: Opera House 
+                  <unitdate>March 7-11,1956</unitdate></unittitle>
+                  <physdesc>23"x33"; Brick colored border surrounding
+                  off-white background; brick colored
+                  lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Munich,Germany: Deutsches Theatre 
+                  <unitdate>December 1-6,1955</unitdate></unittitle>
+                  <physdesc>48"x33"; Black and white background with
+                  large yellow, black, and white lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Munich,Germany: Deutsches Theatre 
+                  <unitdate>February 22-29,1956</unitdate></unittitle>
+                  <physdesc>48"x33"; Two pieces; bright red background
+                  with bright yellow lettering reading "Porgy and Bess"
+                  across the front</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Stuttgart,Germany: Staats Theatre 
+                  <unitdate>March 1-4,1956</unitdate></unittitle>
+                  <physdesc>51"x34"; Two pieces; black background with
+                  large yellow lettering in the middle</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Tel Aviv,Israel: Habimah Theatre 
+                  <unitdate>January 26-30,1955</unitdate></unittitle>
+                  <physdesc>37"x25"; White background with blue border;
+                  red and blue lettering; bigger letters in the middle
+                  than in the rest of poster</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Florence,Italy: Teatro Comunale 
+                  <unitdate>March 9-13,1955</unitdate></unittitle>
+                  <physdesc>27"x13"; Vertical; off-white background
+                  with red and black lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Florence, Italy: Teatro Comunale 
+                  <unitdate>March 9-13,1955</unitdate></unittitle>
+                  <physdesc>48"x33";Mustart-yellow background with
+                  black lettering;red lettering in upper half; Two
+                  purple stamp-like pictures on lower left part; tear
+                  running through title. ("Porgy and Bess")</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Genoa, Italy: Teatro Carlo Felice 
+                  <unitdate>March 1-6,1955</unitdate></unittitle>
+                  <physdesc>40"x14"; Vertical; beige background with
+                  brown and red lettering;has a shield-like emblem
+                  border at the top</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Milan, Italy: Teatro Alla Scala 
+                  <unitdate>February 23-27,1955</unitdate></unittitle>
+                  <physdesc>28"x40"; Bright yellow background; lists
+                  names in black lettering with red lettering in the
+                  upper half.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Milan, Italy: Teatro Allo Scala 
+                  <unitdate>February 23-27,1955</unitdate></unittitle>
+                  <physdesc>15"x11",40"x28",80"x40"; Light brown
+                  background with dark brown lettering; red cross on
+                  shield at top; decorative leafy-style
+                  border</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Naples, Italy: Teatro Di San Carlo 
+                  <unitdate>February 15-17,1955</unitdate></unittitle>
+                  <physdesc>39"x28"; Bright blue background with a
+                  yellow and green illustration of village; white
+                  border; white lettering.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Naples, Italy: Teatro Di San Carlo 
+                  <unitdate>February 15-17,1955</unitdate></unittitle>
+                  <physdesc>52"x38, 37"x26"; Bright yellow background;
+                  balck lettering; red lettering at top; very
+                  simple.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Naples, Italy: Teatro Di San Carlo 
+                  <unitdate>February 15-17,1955</unitdate></unittitle>
+                  <physdesc>22"x13"; Bright mustard yellow background;
+                  brown border; red and brown lettering.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Rome, Italy: Teatro Quattro Fontane 
+                  <unitdate>April 21-May 14,1955</unitdate></unittitle>
+                  <physdesc>10"x7"; Small white playbills with red and
+                  blue lettering; writing on front and back.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Rome, Italy: Teatro Quattro Fontane 
+                  <unitdate>April 21-May 14,1955</unitdate></unittitle>
+                  <physdesc>55"x40",78"x54"; Bright mustard-yellow
+                  background with black and red lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Rome, Italy: Teatro Quattro Fontane 
+                  <unitdate>April 21-May 14,1955</unitdate></unittitle>
+                  <physdesc>40"x14"; Vertical; blue background with
+                  black and red lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Rome, Italy: Teatro Quattro Fontane 
+                  <unitdate>April 21-May 14,1955</unitdate></unittitle>
+                  <physdesc>40"x14"; Vertical; yellow background with
+                  black and red lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Rome, Italy: Teatro Quattro Fontane 
+                  <unitdate>April 21-May 14,1955</unitdate></unittitle>
+                  <physdesc>80"x54"; Three pieces; green and bright
+                  yellow background fading into one another; large red
+                  lettering at top; black lettering at bottom; very
+                  bright and colorful</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Turin, Italy: Teatro Alfieri 
+                  <unitdate>April 9-17,1955</unitdate></unittitle>
+                  <physdesc>27"x13"; Vertical; off-white pink
+                  illustration of a lady in the background; large red
+                  lettering towards top</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Turin, Italy: Teatro Alfieri 
+                  <unitdate>April 9-17,1955</unitdate></unittitle>
+                  <physdesc>38"x26"; Pink and yellow illustration with
+                  black lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Venice, Italy: Teatro La Fenice 
+                  <unitdate>September 22-25,
+                  1954</unitdate></unittitle>
+                  <physdesc>40"x28"; Vibrant red background with half
+                  facial photo of Gershwin in upper right, illustration
+                  of Porgy and Bess on left; black and whitw
+                  lettering.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Venice, Italy: Teatro La Fenice 
+                  <unitdate>September 22-25,
+                  1954</unitdate></unittitle>
+                  <physdesc>40"x14"; A number of these in the
+                  background colors of: yellow, blue-green, blue,
+                  washed-out, white, and pink; black and red
+                  lettering;vertical</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Venice, Italy: Teatro La Fenice 
+                  <unitdate>September 22-25,
+                  1954</unitdate></unittitle>
+                  <physdesc>55"x39"; Large; off-white; red and black
+                  lettering.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Amsterdam, Netherlands: Teatre Carre 
+                  <unitdate>May 19-June3, 1956</unitdate></unittitle>
+                  <physdesc>49"x33"; White border; black lettering
+                  within white squares; yellow squares with black
+                  lettering; bright yellow lettering in very
+                  middle</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Lima, Peru: Teatro Municipal 
+                  <unitdate>September 3-7, 1955</unitdate></unittitle>
+                  <physdesc>52"x34"; Two pieces; washed-out white
+                  background with black lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Warsaw, Poland: National Opera House 
+                  <unitdate>January 24-February 1,
+                  1954</unitdate></unittitle>
+                  <physdesc>40"x28";White background; blue and red
+                  lettering.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Barcelona, Spain: Gran Teatro Del Liceo 
+                  <unitdate>February 3-13, 1955</unitdate></unittitle>
+                  <physdesc>50"x35"; Large; off-white with brown and
+                  red lettering; branch style border with leaves on
+                  it.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Lausanne, Switzerland: Theatre De Beaulieu
+                  <unitdate>March 16-23, 1955</unitdate></unittitle>
+                  <physdesc>28"x14", 50"x36"; Washed-out yellow
+                  background with black and red lettering; bold red
+                  lettering in the middle.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Lausanne, Switzerland: Teatre De Beaulieu 
+                  <unitdate>March 16-23, 1955</unitdate></unittitle>
+                  <physdesc>11"x8";Washed-out white with red and black
+                  lettering; bold red lettering in the
+                  middle.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Zurich, Switzerland: Hallenstadion 
+                  <unitdate>June 3-12, 1955</unitdate></unittitle>
+                  <physdesc>50"x36";Light green background with painted
+                  color figures of Porgy and Bess; black sketch of
+                  village behind them; blue lettering at top; black
+                  lettering throughhout the rest.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Zurich, Switzerland: Hallenstadion 
+                  <unitdate>June 3-12, 1955</unitdate></unittitle>
+                  <physdesc>20"x12"; Black border with lettering
+                  surrounding light green background; painted color
+                  figures of Porgy and Bess; black line sketch of
+                  village behind them; blue lettering at
+                  top.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Chicago, USA: Ciciv Opera House 
+                  <unitdate>June 25, 1952</unitdate></unittitle>
+                  <physdesc>20"x14"; Two shades of orange background;
+                  black and white lettering; illustration of Porgy and
+                  Bess dancing in the middle</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>New York, USA: Ziegfeld Theatre 
+                  <unitdate>March 10-November
+                  28,1953</unitdate></unittitle>
+                  <physdesc>9"x6"; Small; off-white flyer with black
+                  border; stars on sides; black writing; illustration
+                  of village in black.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Leningrad, USSR: Palace of Culture 
+                  <unitdate>December 26-January
+                  5,1956</unitdate></unittitle>
+                  <physdesc>42"x28"; White background; blue and red
+                  lettering in upper half.</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Moscow, USSR: Stanilavsky Theatre 
+                  <unitdate>January 10-17, 1956</unitdate></unittitle>
+                  <physdesc>40"x27"; White background; blue and red
+                  lettering; blue lettering in bottom half</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Zagreb, Yugoslavia: Theatre De'L Opera 
+                  <unitdate>December 11-14, 1954</unitdate></unittitle>
+                  <physdesc>39"x28"; White background; purple and white
+                  lettering</physdesc>
+               </did>
+            </c02>
+            <c02 level="item">
+               <did>
+                  <unittitle>Zagreb, Yugoslavia: Theatre De'L Opera 
+                  <unitdate>Dec 11-14, 1954</unitdate></unittitle>
+                  <physdesc>12"x8"; White background; red and black
+                  lettering; writing on both sides.</physdesc>
+               </did>
+            </c02>
+         </c01>
+      </dsc>
+   </archdesc>
+</ead>
