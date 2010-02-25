@@ -21,11 +21,20 @@
 	</xsl:template>
 
 	<xsl:template match="did">
-		<xsl:text>"</xsl:text><xsl:value-of select="normalize-space(unittitle)"/><xsl:text>"</xsl:text>
+		<xsl:text>"</xsl:text><xsl:value-of select="normalize-space(unittitle/text())"/><xsl:text>"</xsl:text>
 		<xsl:text>,</xsl:text>
 		<!--<xsl:value-of select="origination"/>
 		<xsl:text>,</xsl:text>-->
-		<xsl:text>"</xsl:text><xsl:value-of select="normalize-space(unitdate)"/><xsl:text>"</xsl:text>
+		<xsl:text>"</xsl:text>
+		<xsl:choose>
+			<xsl:when test="unitdate">
+				<xsl:value-of select="normalize-space(unitdate)"/>
+			</xsl:when>
+			<xsl:when test="unittitle/unitdate">
+				<xsl:value-of select="normalize-space(unittitle/unitdate)"/>
+			</xsl:when>
+		</xsl:choose>
+		<xsl:text>"</xsl:text>
 	</xsl:template>
 
 	<xsl:template name="description">

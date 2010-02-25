@@ -4,41 +4,21 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 {
     public function indexAction() 
     {
-		$form = $this->getUpdateForm();
-		$this->view->form = $form;      
-        
-      /*  if (isset($_POST['ead_import_submit'])) {
-            //make sure the user selected a file
-            if (empty($_POST['ead_import_file_name'])) {
-                $view->err = 'Please select a file to import.';
-            } else {
-                
-                // make sure the file is correctly formatted
-               // $eadImportFile = new EadImport_File($_POST['ead_import_file_name']);
-                
-                
-               // if (!$eadImportFile->isValid(2)) {                    
-               //     $view->err = "Your file is incorrectly formatted.  Please select a valid EAD file.";
-                //} else {                    
-                     //redirect to column mapping page
-                    $this->redirect->goto('select-extracts');   
-              //  }                
-            }
-        }*/
-
+		$form = $this->importForm();
+		$this->view->form = $form;
     }
     
     public function updateAction()
     {
 		
-    	$form = $this->getUpdateForm();
+    	$form = $this->importForm();
     	
     	if($_POST){
     		if($form->isValid($_POST)){
     			//Save the file
     			$uploadedData = $form->getValues();
     			$filename = $uploadedData["eaddoc"];
-    			$this->view->filename = $filename;						
+    			$this->view->filename = $filename;		
     			$form->eaddoc->receive();
     			$process = $this->processEad($filename);
     		}
@@ -52,9 +32,11 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	}
 	}
 	
-	private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION){
+	private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY){
+		
 		$xp = new XsltProcessor();
 		$file = $tmpdir . DIRECTORY_SEPARATOR . $filename;
+		$basename = basename($file, '.xml');
 
 		 // create a DOM document and load the XSL stylesheet
 		$xsl = new DomDocument;
@@ -67,21 +49,68 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 		$xml_doc = new DomDocument;
 		$xml_doc->load($file);
 		
-		  // dump text to screen
+		// write transformed csv file to the csv file folder in the csvImport directory
 		if ($doc = $xp->transformToXML($xml_doc)) {
-			echo $doc;
-			#$doc->save('temp.csv');
+			$csvFilename = $csvfilesdir . DIRECTORY_SEPARATOR . $basename . '.csv';
+			$documentFile = fopen($csvFilename, 'w');
+			fwrite($documentFile, $doc);
+			fclose($documentFile);
+			$this->flashSuccess("Successfully generated CSV File");				
+			//execute first step of the CSV import workflow
+			$process = $this->initializeCsvImport($basename);
 		} else {
 			trigger_error('XSL transformation failed.', E_USER_ERROR);
 		} // if 
-		
-		
-		echo $file . '<br/>';
-		echo $stylesheet;
-		
 	}
 	
-	private function getUpdateForm($tmpdir=EAD_IMPORT_TMP_LOCATION)
+	private function initializeCsvImport($basename, $csvImportDirectory = CSV_IMPORT_DIRECTORY){
+		// get the session and view
+        $csvImportSession = new Zend_Session_Namespace('CsvImport');
+        $view = $this->view;
+        
+        $csvImportFile = $basename . '.csv';
+        $itemsArePublic = '';
+        $itemsAreFeatured = '';
+        $collectionId = '';
+        $stopImportIfFileDownloadError = '1';
+        $csvImportItemTypeId = '1';
+        $columnMaps = array();
+        $columnMaps[0] = '50';
+        $columnMaps[1] = '40';
+        
+		/*if (!$csvImportFile->isValid($maxRowsToValidate)) {                    
+			$this->flashError('Your file is incorrectly formatted.  Please select a valid CSV file.');
+		} else {                    
+			// save csv file and item type to the session
+			$csvImportSession->csvImportFile = $csvImportFile;                    
+			$csvImportSession->csvImportItemTypeId = '1';
+			$csvImportSession->csvImportItemsArePublic = '';
+			$csvImportSession->csvImportItemsAreFeatured = '';
+			$csvImportSession->csvImportCollectionId = '';
+			$csvImportSession->csvImportStopImportIfFileDownloadError = '1';
+			//redirect to column mapping page
+			//$this->redirect->goto('/omeka/admin/plugins/csv-import/index/map-columns');
+                }
+        //$this->redirect->goto('../../csv-import/index/map-columns');   */
+        
+				// do the import in the background
+                $csvImport = new CsvImport_Import();
+                $csvImport->initialize($csvImportFile, $csvImportItemTypeId, $collectionId, $itemsArePublic, $itemsAreFeatured, $stopImportIfFileDownloadError, $columnMaps);
+                $csvImport->status = CsvImport_Import::STATUS_IN_PROGRESS_IMPORT;
+                $csvImport->save();
+                
+                // dispatch the background process to import the items
+				$user = current_user();
+				$args = array();
+				$args['import_id'] = $csvImport->id;
+				ProcessDispatcher::startProcess('CsvImport_ImportProcess', $user, $args);
+                
+                //redirect to column mapping page
+                //$this->flashSuccess("Successfully started the import. Reload this page for status updates.");
+                //$this->redirect->goto('status');
+	}
+	
+	private function importForm($tmpdir=EAD_IMPORT_TMP_LOCATION)
 	{
 	    require "Zend/Form/Element.php";
     
@@ -99,7 +128,13 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	$form->addElement($fileUploadElement);
     	
     	//CSV import inputs
+		//echo csv_import_get_item_types_drop_down('csv_import_item_type_id', 'Item Type');
 		
+		
+		/*echo csv_import_get_collections_drop_down('csv_import_collection_id', 'Collection');
+		echo csv_import_checkbox('csv_import_items_are_public', 'Items Are Public?', 'field');
+		echo csv_import_checkbox('csv_import_items_are_featured', 'Items Are Featured?', 'field');
+		echo csv_import_checkbox('csv_import_stop_import_if_file_download_error', 'Stop Import If A File For An Item Cannot Be Downloaded?', 'field', true);*/
     	
     	//Submit button
     	$form->addElement('submit','submit');
@@ -110,61 +145,15 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	//echo $tmpdir;
     	return $form;
 	}
-    
-   /* public function selectExtractsAction()
+	
+    /*public function statusAction() 
     {
         // get the session and view
-        $eadImportSession = new Zend_Session_Namespace('EadImport');
-        $itemsArePublic = $eadImportSession->eadImportItemsArePublic;
-        $itemsAreFeatured = $eadImportSession->eadImportItemsAreFeatured;
-        $collectionId = $eadImportSession->eadImportCollectionId;
-        $stopImportIfFileDownloadError = $eadImportSession->eadImportStopImportIfFileDownloadError;
-        
-        $view = $this->view;
-
-        // get the ead file to import
-        $eadImportFile = $eadImportSession->eadImportFile;
-                
-        // pass the ead file to the view
-        $view->err = '';
-        $view->eadImportFile = $eadImportFile;      
-                
-        // process submitted column mappings
-        if (isset($_POST['csv_import_submit'])) {
-            
-          
-            }           
-            
-            // make sure the user select at least one type of data to be extracted
-            if (count($extractSelections) == 0) {
-                $view->err = 'Please select at least one type of data to be extracted.';
-            }
-            
-            // if there are no errors with the extraction selctions, then run the import and goto the status page
-            if (empty($view->err)) {
-                
-                // do the import in the background
-                $eadImport = new EadImport_Import();
-                $eadImport->initialize($eadImportFile->getFileName(), $collectionId, $itemsArePublic, $itemsAreFeatured, $stopImportIfFileDownloadError, $extractSelections);
-                $eadImport->transform();
-                foreach ($eadImport->getCsvImports() as $csvImport) {
-                	$this->_backgroundImport($csvImport);
-                }
-                //redirect to column mapping page
-                $this->flashSuccess("Successfully started import. Reload this page for status updates.");
-                $this->redirect->goto('status');
-                
-            }  
-        }   */
-    
-    public function statusAction() 
-    {
-        // get the session and view
-        $eadImportSession = new Zend_Session_Namespace('EadImport');
+        $eadImportSession = new Zend_Session_Namespace('EadImporter');
         $view = $this->view;
         
         //get the imports
-        $view->eadImports =  EadImport_Import::getImports();
-    }
+        $view->eadImports =  EadImporter_Import::getImports();
+    }*/
     
 }
