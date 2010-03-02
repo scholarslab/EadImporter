@@ -50,17 +50,26 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 		$xml_doc->load($file);
 		
 		// write transformed csv file to the csv file folder in the csvImport directory
-		if ($doc = $xp->transformToXML($xml_doc)) {
-			$csvFilename = $csvfilesdir . DIRECTORY_SEPARATOR . $basename . '.csv';
-			$documentFile = fopen($csvFilename, 'w');
-			fwrite($documentFile, $doc);
-			fclose($documentFile);
-			$this->flashSuccess("Successfully generated CSV File");				
-			//execute first step of the CSV import workflow
-			$process = $this->initializeCsvImport($basename);
-		} else {
-			trigger_error('XSL transformation failed.', E_USER_ERROR);
-		} // if 
+		try { 
+		//if ($xml_doc->schemaValidate('eadVIVA.dtd')){		
+			if ($doc = $xp->transformToXML($xml_doc)) {			
+				$csvFilename = $csvfilesdir . DIRECTORY_SEPARATOR . $basename . '.csv';
+				$documentFile = fopen($csvFilename, 'w');
+				fwrite($documentFile, $doc);
+				fclose($documentFile);
+				$this->flashSuccess("Successfully generated CSV File");				
+				//execute first step of the CSV import workflow
+				//$process = $this->initializeCsvImport($basename);
+							} else {
+				trigger_error('XSL transformation failed.', E_USER_ERROR);
+			} // if 
+		/*} else{
+			echo 'error!';
+			$this->flashError('Document failed to validate.');
+		}*/
+		} catch (Exception $e){
+			$this->view->error = $e->getMessage();			
+		}
 	}
 	
 	private function initializeCsvImport($basename, $csvImportDirectory = CSV_IMPORT_DIRECTORY){
@@ -100,10 +109,10 @@ class EadImporter_IndexController extends Omeka_Controller_Action
                 $csvImport->save();
                 
                 // dispatch the background process to import the items
-				$user = current_user();
+				/*$user = current_user();
 				$args = array();
 				$args['import_id'] = $csvImport->id;
-				ProcessDispatcher::startProcess('CsvImport_ImportProcess', $user, $args);
+				ProcessDispatcher::startProcess('CsvImport_ImportProcess', $user, $args);*/
                 
                 //redirect to column mapping page
                 //$this->flashSuccess("Successfully started the import. Reload this page for status updates.");
