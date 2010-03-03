@@ -10,12 +10,9 @@
 		<xsl:text>Title,Date,Creator,Publisher,Format,Identifier,Coverage,Description,Language,Type,Subject,Rights</xsl:text>
 		<xsl:text>
 		</xsl:text>
-		<!-- now we have to try to pick up all item-level components -->
-		<xsl:for-each select="descendant::node()[@level='item']">
-			<xsl:apply-templates select="." mode="item"/>
-		</xsl:for-each>
+		<!-- now we have to try to pick up all item-level components -->		
 		<xsl:for-each
-			select="descendant::c[not(@level)] | descendant::c01[not(@level)] | descendant::c02[not(@level)] | descendant::c03[not(@level)] | descendant::c04[not(@level)] | descendant::c05[not(@level)] | descendant::c06[not(@level)] | descendant::c07[not(@level)] | descendant::c08[not(@level)] | descendant::c09[not(@level)] | descendant::c10[not(@level)] | descendant::c11[not(@level)]">
+			select="descendant::c | descendant::c01 | descendant::c02 | descendant::c03 | descendant::c04 | descendant::c05 | descendant::c06 | descendant::c07 | descendant::c08 | descendant::c09 | descendant::c10 | descendant::c11">
 			<xsl:if
 				test="not(child::c) and not(child::c02) and not(child::c03) and not(child::c04) and not(child::c05) and not(child::c06) and not(child::c07) and not(child::c08) and not(child::c09) and not(child::c10) and not(child::c11) and not(child::c12)">
 				<xsl:apply-templates select="." mode="item"/>
@@ -95,10 +92,10 @@
 				<xsl:apply-templates select="/ead/archdesc/descgrp/accessrestrict"/>
 			</xsl:when>
 		</xsl:choose>
-		<xsl:if
+		<!--<xsl:if
 			test="accessrestrict or /ead/archdesc/accessrestrict or /ead/archdesc/descgrp/accessrestrict">
 			<xsl:text> </xsl:text>
-		</xsl:if>
+		</xsl:if>-->
 		<xsl:choose>
 			<xsl:when test="userestrict">
 				<xsl:apply-templates select="userestrict"/>

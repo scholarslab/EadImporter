@@ -12,27 +12,34 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     {
 		
     	$form = $this->importForm();
+    	$uploadedData = $form->getValues();
+    	$filename = $uploadedData["eaddoc"];
     	
-    	if($_POST){
+    	if($_POST && $filename != null){
     		if($form->isValid($_POST)){
-    			//Save the file
-    			$uploadedData = $form->getValues();
-    			$filename = $uploadedData["eaddoc"];
+    			//Save the file    			
     			$this->view->filename = $filename;		
-    			$form->eaddoc->receive();
-    			$process = $this->processEad($filename);
+    			$form->eaddoc->receive();    			
+    			$this->flashSuccess("Received file " . $filename);			
+    			//$process = $this->processEad($filename);
+				$args = array();
+				$args['filename'] = $filename;
+    			
+    			ProcessDispatcher::startProcess('EadImporter_ProcessEad', null, $args);	
     		}
     		else
     		{
     			$this->view->form = $form;
+    			$this->flashError("Error receiving file.");
     		}
     	}
     	else {
     		$this->view->form = $form;
+    		$this->flashError('Error receiving file or no file selected.');
     	}
 	}
 	
-	private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY){
+	/*private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY){
 		
 		$xp = new XsltProcessor();
 		$file = $tmpdir . DIRECTORY_SEPARATOR . $filename;
@@ -51,7 +58,7 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 		
 		// write transformed csv file to the csv file folder in the csvImport directory
 		try { 
-		//if ($xml_doc->schemaValidate('eadVIVA.dtd')){		
+		if (simplexml_import_dom($xml_doc)){
 			if ($doc = $xp->transformToXML($xml_doc)) {			
 				$csvFilename = $csvfilesdir . DIRECTORY_SEPARATOR . $basename . '.csv';
 				$documentFile = fopen($csvFilename, 'w');
@@ -61,16 +68,17 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 				//execute first step of the CSV import workflow
 				//$process = $this->initializeCsvImport($basename);
 							} else {
-				trigger_error('XSL transformation failed.', E_USER_ERROR);
+				$this->flashError("Could not transform XML file.  Be sure your EAD document is valid.");
 			} // if 
-		/*} else{
-			echo 'error!';
-			$this->flashError('Document failed to validate.');
-		}*/
+		} else {
+			$this->flashError("Error parsing EAD document.");
+		}		
 		} catch (Exception $e){
-			$this->view->error = $e->getMessage();			
+			$this->view->error = $e->getMessage();
+			
 		}
-	}
+		
+	}*/
 	
 	private function initializeCsvImport($basename, $csvImportDirectory = CSV_IMPORT_DIRECTORY){
 		// get the session and view

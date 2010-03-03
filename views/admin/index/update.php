@@ -4,8 +4,13 @@
 <h1>EAD Import</h1>
 
 <div id="primary">
-  <p><?php echo $filename ?> successfully uploaded!</p>
-  <p><?php if (isset($error)) { echo $error; } ?></p>
+	<?php echo flash(); ?>
+ 	<?php
+            if (!empty($err)) {
+                echo '<p class="error">' . html_escape($err) . '</p>';
+            }
+        ?>
+        <p><a href="../index/">Return to form</a>.</p>
 </div>
 
 <?php 
