@@ -30,7 +30,7 @@ class EadImporter_ProcessEad extends ProcessAbstract {
 				fclose($documentFile);
 				$this->flashSuccess("Successfully generated CSV File");				
 				//execute first step of the CSV import workflow
-				//$process = $this->initializeCsvImport($basename);
+				$process = $this->initializeCsvImport($basename);
 							} else {
 				$this->flashError("Could not transform XML file.  Be sure your EAD document is valid.");
 			} // if 

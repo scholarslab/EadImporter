@@ -21,11 +21,11 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     			$this->view->filename = $filename;		
     			$form->eaddoc->receive();    			
     			$this->flashSuccess("Received file " . $filename);			
-    			//$process = $this->processEad($filename);
-				$args = array();
-				$args['filename'] = $filename;
+    			$process = $this->processEad($filename);
+				//$args = array();
+				//$args['filename'] = $filename;
     			
-    			ProcessDispatcher::startProcess('EadImporter_ProcessEad', null, $args);	
+    			//ProcessDispatcher::startProcess('EadImporter_ProcessEad', null, $args);	
     		}
     		else
     		{
@@ -39,7 +39,7 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	}
 	}
 	
-	/*private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY){
+	private function processEad($filename, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY){
 		
 		$xp = new XsltProcessor();
 		$file = $tmpdir . DIRECTORY_SEPARATOR . $filename;
@@ -66,7 +66,7 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 				fclose($documentFile);
 				$this->flashSuccess("Successfully generated CSV File");				
 				//execute first step of the CSV import workflow
-				//$process = $this->initializeCsvImport($basename);
+				$process = $this->initializeCsvImport($basename);
 							} else {
 				$this->flashError("Could not transform XML file.  Be sure your EAD document is valid.");
 			} // if 
@@ -78,7 +78,7 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 			
 		}
 		
-	}*/
+	}
 	
 	private function initializeCsvImport($basename, $csvImportDirectory = CSV_IMPORT_DIRECTORY){
 		// get the session and view
@@ -92,8 +92,55 @@ class EadImporter_IndexController extends Omeka_Controller_Action
         $stopImportIfFileDownloadError = '1';
         $csvImportItemTypeId = '1';
         $columnMaps = array();
-        $columnMaps[0] = '50';
-        $columnMaps[1] = '40';
+        
+        //Title
+		$columnMap = new CsvImport_ColumnMap('0', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('50');
+		$columnMaps[] = $columnMap;
+		//Date
+		$columnMap = new CsvImport_ColumnMap('1', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('40');
+		$columnMaps[] = $columnMap;
+		//Creator
+		$columnMap = new CsvImport_ColumnMap('2', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('39');
+		$columnMaps[] = $columnMap;
+		//Publisher
+		$columnMap = new CsvImport_ColumnMap('3', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('45');
+		$columnMaps[] = $columnMap;
+		//Format
+		$columnMap = new CsvImport_ColumnMap('4', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('42');
+		$columnMaps[] = $columnMap;
+		//Identifier
+		$columnMap = new CsvImport_ColumnMap('5', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('43');
+		$columnMaps[] = $columnMap;
+		//Coverage
+		$columnMap = new CsvImport_ColumnMap('6', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('38');
+		$columnMaps[] = $columnMap;
+		//Description
+		$columnMap = new CsvImport_ColumnMap('7', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('41');
+		$columnMaps[] = $columnMap;
+		//Language
+		$columnMap = new CsvImport_ColumnMap('8', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('44');
+		$columnMaps[] = $columnMap;
+		//Type
+		$columnMap = new CsvImport_ColumnMap('9', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('51');
+		$columnMaps[] = $columnMap;
+		//Subject
+		$columnMap = new CsvImport_ColumnMap('10', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('49');
+		$columnMaps[] = $columnMap;
+		//Rights
+		$columnMap = new CsvImport_ColumnMap('11', CsvImport_ColumnMap::TARGET_TYPE_ELEMENT);
+		$columnMap->addElementId('47');
+		$columnMaps[] = $columnMap;
         
 		/*if (!$csvImportFile->isValid($maxRowsToValidate)) {                    
 			$this->flashError('Your file is incorrectly formatted.  Please select a valid CSV file.');
@@ -117,14 +164,14 @@ class EadImporter_IndexController extends Omeka_Controller_Action
                 $csvImport->save();
                 
                 // dispatch the background process to import the items
-				/*$user = current_user();
+				$user = current_user();
 				$args = array();
 				$args['import_id'] = $csvImport->id;
-				ProcessDispatcher::startProcess('CsvImport_ImportProcess', $user, $args);*/
+				ProcessDispatcher::startProcess('CsvImport_ImportProcess', $user, $args);
                 
-                //redirect to column mapping page
-                //$this->flashSuccess("Successfully started the import. Reload this page for status updates.");
-                //$this->redirect->goto('status');
+				//redirect to column mapping page
+				$this->flashSuccess("Successfully started the import. Check the CSV Import status page for updates.");
+				//$this->redirect->goto('status');
 	}
 	
 	private function importForm($tmpdir=EAD_IMPORT_TMP_LOCATION)
