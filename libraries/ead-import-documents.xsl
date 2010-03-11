@@ -10,13 +10,21 @@
 		<xsl:text>Title,Date,Creator,Publisher,Format,Identifier,Coverage,Description,Language,Type,Subject,Rights</xsl:text>
 		<xsl:text>
 		</xsl:text>
-		<!-- now we have to try to pick up all item-level components -->		
+		<!-- now we have to try to pick up all item-level components -->
 		<xsl:for-each
 			select="descendant::c | descendant::c01 | descendant::c02 | descendant::c03 | descendant::c04 | descendant::c05 | descendant::c06 | descendant::c07 | descendant::c08 | descendant::c09 | descendant::c10 | descendant::c11">
+
+			<!-- assume that any component without children is an item, possibly unsafe but level is not explicitly required in EAD -->
 			<xsl:if
 				test="not(child::c) and not(child::c02) and not(child::c03) and not(child::c04) and not(child::c05) and not(child::c06) and not(child::c07) and not(child::c08) and not(child::c09) and not(child::c10) and not(child::c11) and not(child::c12)">
 				<xsl:apply-templates select="." mode="item"/>
 			</xsl:if>
+
+			<!-- uncomment below and comment conditional above if levels are explicit in guides -->
+			<!--<xsl:if
+				test="@level = 'item'">
+				<xsl:apply-templates select="." mode="item"/>
+			</xsl:if>-->
 		</xsl:for-each>
 	</xsl:template>
 
@@ -201,20 +209,24 @@
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template
-		match="abstract | bioghist | descgrp | scopecontent">
+	<xsl:template match="abstract | bioghist | descgrp | scopecontent">
 		<xsl:variable name="singlequote">
 			<xsl:text>&#x0027;</xsl:text>
 		</xsl:variable>
 
 		<!--<xsl:value-of select="normalize-space(translate(., '&#x0022;', $singlequote))"/>-->
-		<xsl:value-of select="translate(normalize-space(.), '&#x0022;', $singlequote)"/>
-		<xsl:text> </xsl:text>
-	</xsl:template>
-	
-	<xsl:template match="accessrestrict | userestrict">
 		<xsl:for-each select="descendant-or-self::text()">
-			<xsl:value-of select="normalize-space(.)"/>
+			<xsl:value-of select="translate(normalize-space(.), '&#x0022;', $singlequote)"/>
+			<xsl:text> </xsl:text>
+		</xsl:for-each>
+	</xsl:template>
+
+	<xsl:template match="accessrestrict | userestrict">
+		<xsl:variable name="singlequote">
+			<xsl:text>&#x0027;</xsl:text>
+		</xsl:variable>
+		<xsl:for-each select="descendant-or-self::text()">
+			<xsl:value-of select="translate(normalize-space(.), '&#x0022;', $singlequote)"/>
 			<xsl:text> </xsl:text>
 		</xsl:for-each>
 	</xsl:template>
