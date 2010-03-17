@@ -1,6 +1,5 @@
 <?php 
 
-class Zend_View_Helper_Importer {
-
-	
+class Zend_View_Helper_Importer 
+{	
 }
