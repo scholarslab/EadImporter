@@ -4,6 +4,7 @@
 	xmlns:str="http://exslt.org/strings">
 
 	<xsl:output method="text"/>
+	<xsl:param name="query"/>
 
 	<xsl:template match="/">
 		<!-- the first line contains column names -->
@@ -29,96 +30,22 @@
 	</xsl:template>
 
 	<xsl:template match="node()" mode="item">
-		<xsl:apply-templates select="did"/>
-
-		<!-- coverage -->
-		<xsl:text>"</xsl:text>
-		<xsl:value-of select="normalize-space(descendant::unitdate)"/>
-		<xsl:if test="descendant::unitdate and descendant::geogname">
-			<xsl:text> </xsl:text>
-		</xsl:if>
-		<xsl:for-each select="descendant::geogname">
-			<xsl:value-of select="normalize-space(.)"/>
-			<xsl:if test="not(position() = last())">
-				<xsl:text> </xsl:text>
-			</xsl:if>
-		</xsl:for-each>
-		<xsl:text>",</xsl:text>
-
-		<!-- description -->
-		<xsl:text>"</xsl:text>
-		<xsl:apply-templates select="abstract | bioghist | descgrp | scopecontent"/>
-		<xsl:text>",</xsl:text>
-
-		<!-- language -->
-		<xsl:text>"</xsl:text>
 		<xsl:choose>
-			<xsl:when test="langmaterial/language">
-				<xsl:for-each select="langmaterial/language">
-					<xsl:value-of select="normalize-space(.)"/>
-					<xsl:if test="not(position() = last())">
+			<xsl:when test="string(normalize-space($query))">
+				<xsl:variable name="text">
+					<xsl:for-each select="descendant-or-self::text()">
+						<xsl:value-of select="translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"/>
 						<xsl:text> </xsl:text>
-					</xsl:if>
-				</xsl:for-each>
+					</xsl:for-each>
+				</xsl:variable>
+				<xsl:if test="contains($text, $query)">
+					<xsl:call-template name="get_record"/>
+				</xsl:if>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:for-each select="/ead/archdesc/did/langmaterial/language">
-					<xsl:value-of select="normalize-space(.)"/>
-					<xsl:if test="not(position() = last())">
-						<xsl:text> </xsl:text>
-					</xsl:if>
-				</xsl:for-each>
+				<xsl:call-template name="get_record"/>
 			</xsl:otherwise>
 		</xsl:choose>
-		<xsl:text>",</xsl:text>
-
-		<!-- type -->
-		<xsl:text>"</xsl:text>
-		<xsl:value-of select="@level"/>
-		<xsl:text>",</xsl:text>
-
-		<!-- subject -->
-		<xsl:text>"</xsl:text>
-		<xsl:for-each select="descendant::subject">
-			<xsl:value-of select="normalize-space(.)"/>
-			<xsl:if test="not(position() = last())">
-				<xsl:text>;</xsl:text>
-			</xsl:if>
-		</xsl:for-each>
-		<xsl:text>",</xsl:text>
-
-		<!-- rights -->
-		<xsl:text>"</xsl:text>
-		<xsl:choose>
-			<xsl:when test="accessrestrict">
-				<xsl:apply-templates select="accessrestrict"/>
-			</xsl:when>
-			<xsl:when test="/ead/archdesc/accessrestrict">
-				<xsl:apply-templates select="/ead/archdesc/accessrestrict"/>
-			</xsl:when>
-			<xsl:when test="/ead/archdesc/descgrp/accessrestrict">
-				<xsl:apply-templates select="/ead/archdesc/descgrp/accessrestrict"/>
-			</xsl:when>
-		</xsl:choose>
-		<!--<xsl:if
-			test="accessrestrict or /ead/archdesc/accessrestrict or /ead/archdesc/descgrp/accessrestrict">
-			<xsl:text> </xsl:text>
-		</xsl:if>-->
-		<xsl:choose>
-			<xsl:when test="userestrict">
-				<xsl:apply-templates select="userestrict"/>
-			</xsl:when>
-			<xsl:when test="/ead/archdesc/userestrict">
-				<xsl:apply-templates select="/ead/archdesc/userestrict"/>
-			</xsl:when>
-			<xsl:when test="/ead/archdesc/descgrp/userestrict">
-				<xsl:apply-templates select="/ead/archdesc/descgrp/userestrict"/>
-			</xsl:when>
-		</xsl:choose>
-		<xsl:text>"</xsl:text>
-
-		<xsl:text>
-		</xsl:text>
 	</xsl:template>
 
 	<xsl:template match="did">
@@ -229,6 +156,97 @@
 			<xsl:value-of select="translate(normalize-space(.), '&#x0022;', $singlequote)"/>
 			<xsl:text> </xsl:text>
 		</xsl:for-each>
+	</xsl:template>
+	
+	<xsl:template name="get_record">
+		<xsl:apply-templates select="did"/>
+		<!-- coverage -->
+		<xsl:text>"</xsl:text>
+		<xsl:value-of select="normalize-space(descendant::unitdate)"/>
+		<xsl:if test="descendant::unitdate and descendant::geogname">
+			<xsl:text> </xsl:text>
+		</xsl:if>
+		<xsl:for-each select="descendant::geogname">
+			<xsl:value-of select="normalize-space(.)"/>
+			<xsl:if test="not(position() = last())">
+				<xsl:text> </xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+		<xsl:text>",</xsl:text>
+		
+		<!-- description -->
+		<xsl:text>"</xsl:text>
+		<xsl:apply-templates select="abstract | bioghist | descgrp | scopecontent"/>
+		<xsl:text>",</xsl:text>
+		
+		<!-- language -->
+		<xsl:text>"</xsl:text>
+		<xsl:choose>
+			<xsl:when test="langmaterial/language">
+				<xsl:for-each select="langmaterial/language">
+					<xsl:value-of select="normalize-space(.)"/>
+					<xsl:if test="not(position() = last())">
+						<xsl:text> </xsl:text>
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:for-each select="/ead/archdesc/did/langmaterial/language">
+					<xsl:value-of select="normalize-space(.)"/>
+					<xsl:if test="not(position() = last())">
+						<xsl:text> </xsl:text>
+					</xsl:if>
+				</xsl:for-each>
+			</xsl:otherwise>
+		</xsl:choose>
+		<xsl:text>",</xsl:text>
+		
+		<!-- type -->
+		<xsl:text>"</xsl:text>
+		<xsl:value-of select="@level"/>
+		<xsl:text>",</xsl:text>
+		
+		<!-- subject -->
+		<xsl:text>"</xsl:text>
+		<xsl:for-each select="descendant::subject">
+			<xsl:value-of select="normalize-space(.)"/>
+			<xsl:if test="not(position() = last())">
+				<xsl:text>;</xsl:text>
+			</xsl:if>
+		</xsl:for-each>
+		<xsl:text>",</xsl:text>
+		
+		<!-- rights -->
+		<xsl:text>"</xsl:text>
+		<xsl:choose>
+			<xsl:when test="accessrestrict">
+				<xsl:apply-templates select="accessrestrict"/>
+			</xsl:when>
+			<xsl:when test="/ead/archdesc/accessrestrict">
+				<xsl:apply-templates select="/ead/archdesc/accessrestrict"/>
+			</xsl:when>
+			<xsl:when test="/ead/archdesc/descgrp/accessrestrict">
+				<xsl:apply-templates select="/ead/archdesc/descgrp/accessrestrict"/>
+			</xsl:when>
+		</xsl:choose>
+		<!--<xsl:if
+			test="accessrestrict or /ead/archdesc/accessrestrict or /ead/archdesc/descgrp/accessrestrict">
+			<xsl:text> </xsl:text>
+			</xsl:if>-->
+		<xsl:choose>
+			<xsl:when test="userestrict">
+				<xsl:apply-templates select="userestrict"/>
+			</xsl:when>
+			<xsl:when test="/ead/archdesc/userestrict">
+				<xsl:apply-templates select="/ead/archdesc/userestrict"/>
+			</xsl:when>
+			<xsl:when test="/ead/archdesc/descgrp/userestrict">
+				<xsl:apply-templates select="/ead/archdesc/descgrp/userestrict"/>
+			</xsl:when>
+		</xsl:choose>
+		<xsl:text>"</xsl:text>
+		<xsl:text>
+		</xsl:text>
 	</xsl:template>
 
 </xsl:stylesheet>

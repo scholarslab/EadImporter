@@ -17,6 +17,7 @@ define('EAD_IMPORT_PERSONS_EXTRACTOR', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATO
 
 add_plugin_hook('install', 'ead_import_install');
 add_plugin_hook('define_acl', 'ead_import_define_acl');
+add_plugin_hook('admin_theme_header', 'ead_importer_admin_header');
 add_filter('admin_navigation_main', 'ead_import_admin_navigation');
 
 function ead_import_install()
@@ -44,4 +45,12 @@ function ead_import_admin_navigation($tabs)
 function ead_import_define_acl($acl)
 {
     $acl->loadResourceList(array('EadImporter_Index' => array('index', 'status')));
+}
+
+function ead_importer_admin_header($request)
+{
+	if ($request->getModuleName() == 'ead-importer') {
+		echo js('jquery-1.4.2.min');
+		echo js('ead_importer_main');
+    }
 }

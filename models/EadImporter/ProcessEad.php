@@ -5,8 +5,12 @@ class EadImporter_ProcessEad extends ProcessAbstract
 	public function run($args, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY, $csvImportDirectory = CSV_IMPORT_DIRECTORY) 
 	{		
        //get the xml file using $args['filename'] and process away...
-		$xp = new XsltProcessor();
+		$xp = new XsltProcessor();		
 		$filename = $args['filename'];
+		$filter_string = $args['filterstring'];
+		$xp->setParameter( '', 'query', $filter_string);
+		//$itemsArePublic = $args['ead_importer_items_are_public'];
+		
 		$file = $tmpdir . DIRECTORY_SEPARATOR . $filename;
 		$basename = basename($file, '.xml');
 
@@ -45,8 +49,8 @@ class EadImporter_ProcessEad extends ProcessAbstract
 	        //$view = $this->view;
 	        
 	        $csvImportFile = $basename . '.csv';
-	        $itemsArePublic = '';
 	        $itemsAreFeatured = '';
+	        $itemsArePublic = '';
 	        $collectionId = '';
 	        $stopImportIfFileDownloadError = '1';
 	        $csvImportItemTypeId = '1';
