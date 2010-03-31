@@ -5,12 +5,19 @@ class EadImporter_ProcessEad extends ProcessAbstract
 	public function run($args, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY, $csvImportDirectory = CSV_IMPORT_DIRECTORY) 
 	{		
        //get the xml file using $args['filename'] and process away...
-		$xp = new XsltProcessor();		
+		$xp = new XsltProcessor();	
+
+		//Get variables from args array passed into detached process
 		$filename = $args['filename'];
+		$itemsArePublic = $args['ead_importer_items_are_public'];
+		$itemsAreFeatured = $args['ead_importer_items_are_featured'];
+		$collectionId = $args['ead_importer_collection_id'];
 		$filter_string = $args['filterstring'];
-		$xp->setParameter( '', 'query', $filter_string);
-		//$itemsArePublic = $args['ead_importer_items_are_public'];
 		
+		//set query parameter to pass into stylesheet
+		$xp->setParameter( '', 'query', $filter_string);
+		
+		//set path to xml file in order to load it
 		$file = $tmpdir . DIRECTORY_SEPARATOR . $filename;
 		$basename = basename($file, '.xml');
 
@@ -32,7 +39,7 @@ class EadImporter_ProcessEad extends ProcessAbstract
 				$documentFile = fopen($csvFilename, 'w');
 				fwrite($documentFile, $doc);
 				fclose($documentFile);
-				$this->_initializeCsvImport($basename);
+				$this->_initializeCsvImport($basename, $itemsArePublic, $itemsAreFeatured, $collectionId);
 				$this->flashSuccess("Successfully generated CSV File");
 			} else {
 				$this->flashError("Could not transform XML file.  Be sure your EAD document is valid.");
@@ -42,16 +49,14 @@ class EadImporter_ProcessEad extends ProcessAbstract
 		}
 	}
 	
-	private function _initializeCsvImport($basename, $csvImportDirectory = CSV_IMPORT_DIRECTORY)
+	private function _initializeCsvImport($basename, $itemsArePublic, $itemsAreFeatured, $collectionId, $csvImportDirectory = CSV_IMPORT_DIRECTORY)
 	{	    
-		    // get the session and view
-	        //$csvImportSession = new Zend_Session_Namespace('CsvImport');
-	        //$view = $this->view;
-	        
-	        $csvImportFile = $basename . '.csv';
-	        $itemsAreFeatured = '';
-	        $itemsArePublic = '';
-	        $collectionId = '';
+	
+			/* this function does automatic column mapping and sets attributes necessary for the csvImport plugin,
+			* such as defining whether or not the items are public and what collection they belong to
+			*/
+	
+			$csvImportFile = $basename . '.csv';
 	        $stopImportIfFileDownloadError = '1';
 	        $csvImportItemTypeId = '1';
 	        $columnMaps = array();

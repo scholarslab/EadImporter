@@ -50,7 +50,8 @@ function ead_import_define_acl($acl)
 function ead_importer_admin_header($request)
 {
 	if ($request->getModuleName() == 'ead-importer') {
-		echo js('jquery-1.4.2.min');
-		echo js('ead_importer_main');
+		//echo js('jquery-1.4.2.min');
+		//echo js('ead_importer_main');
+		echo '<link rel="stylesheet" href="' . html_escape(css('ead_importer_main')) . '" />';
     }
 }

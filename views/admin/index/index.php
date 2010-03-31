@@ -4,7 +4,10 @@
 <h1>EAD Import</h1>
 
 <div id="primary">
-    <h2>Step 1: Select File and Item Settings</h2>
+    <h2>Select File and Item Settings</h2>
+    <p>Select an EAD file to upload and item settings for import into the Omeka database.  
+    Items are imported as Documents and the column mapping is predefined based on 
+    the EAD-to-Dublin Core crosswalk.  Simple filtering by string matching is available.</p>
     <?php echo $form; ?>
 </div>
 

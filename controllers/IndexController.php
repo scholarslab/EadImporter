@@ -19,8 +19,6 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     		if ($form->isValid($this->_request->getPost() )) {
 				$uploadedData = $form->getValues();
 				$filename = $uploadedData['eaddoc'];
-    			$filter_string = $uploadedData['filterstring'];
-    			echo var_dump($uploadedData);
     			
     			//Save the file    			
     			$this->view->filename = $filename;		
@@ -35,8 +33,10 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 					if (simplexml_import_dom($xml_doc)){
 						$args = array();
 						$args['filename'] = $filename;
-						$args['filterstring'] = $filter_string;
-						//$args['ead_importer_items_are_public'] = $itemsArePublic;
+						$args['ead_importer_items_are_public'] = $uploadedData['ead_importer_items_are_public'];
+						$args['ead_importer_items_are_featured'] = $uploadedData['ead_importer_items_are_featured'];
+						$args['ead_importer_collection_id'] = $uploadedData['ead_importer_collection_id'];
+						$args['filterstring'] = $uploadedData['filterstring'];
 						
     					ProcessDispatcher::startProcess('EadImporter_ProcessEad', null, $args);
 					    $this->flashSuccess("Received file " . $filename . " Check the CSV Import status page for updates.  Note that large EAD files may take a minute or two to appear in the status page.");
@@ -60,9 +60,21 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	}
 	}
 	
+	function get_collections($params = array(), $limit = 10)
+	{
+    	return get_db()->getTable('Collection')->findBy($params, $limit);
+	}
+	
 	private function importForm($tmpdir=EAD_IMPORT_TMP_LOCATION)
 	{
-	    require "Zend/Form/Element.php";
+	    require "Zend/Form/Element.php";	
+
+	    //Get collections table and load into array
+	    $collections = array();
+		$collectionObjects = get_db()->getTable('Collection')->findAll();
+		foreach($collectionObjects as $collectionObject) {
+			$collections[$collectionObject->id] = $collectionObject->name;
+		}
 	    
     	$form = new Zend_Form();
     	$form->setAction('update');
@@ -77,17 +89,23 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	$fileUploadElement->addValidator('extension', false, 'xml');        	
     	$form->addElement($fileUploadElement);
     	
-    	//is public checkbox
-    	/*$itemsArePublic = new Zend_Form_Element_Checkbox('ead_importer_items_are_public');
-    	$itemsArePublic->setLabel('Items Are Public?');
-    	$form->addElement($itemsArePublic);*/
+    	//Collection
+    	 $collectionId = new Zend_Form_Element_Select('ead_importer_collection_id');
+    	 $collectionId->setLabel('Collection')
+    	 		->addMultiOptions($collections);				
+    	 $form->addElement($collectionId);
     	
-    	/*$form->addElement('checkbox', 'ead_importer_items_are_public', array(
-	                 'label' => 'Items Are Public?',
-			 'value' => '1'
-      	              ));*/
+    	//Items are Public?
+    	$itemsArePublic = new Zend_Form_Element_Checkbox('ead_importer_items_are_public');
+    	$itemsArePublic->setLabel('Items Are Public?');
+    	$form->addElement($itemsArePublic);
+    	
+    	//Items are Featured?
+    	$itemsAreFeatured = new Zend_Form_Element_Checkbox('ead_importer_items_are_featured');
+    	$itemsAreFeatured->setLabel('Items Are Featured?');
+    	$form->addElement($itemsAreFeatured);
 
-    	//Filter
+    	//Filter Text
     	$textElement = new Zend_Form_Element_Text('filterstring');
     	$textElement->addFilter('StringToLower');
     	$textElement->setLabel('Filter by String:');
@@ -97,17 +115,6 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	$form->addElement('submit','submit');
     	$submitElement=$form->getElement('submit');
     	$submitElement->setLabel('Upload EAD Document');
-    	
-		
-			/*$form->setElementDecorators(array(
-			'ViewHelper',
-			array(array('data' => 'HtmlTag'), array('tag' => 'dd', 'class' => 'element')),
-			array('Label', array('tag' => 'dt')),
-			array(array('row' => 'HtmlTag'), array('tag' => 'div')),
-		));*/
-		
-		
-		//$form->setDecorators(array('FormElements',array('HtmlTag',array('tag'=>'div'))));
     	
     	return $form;
 	}
