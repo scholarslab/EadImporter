@@ -19,6 +19,15 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     		if ($form->isValid($this->_request->getPost() )) {
 				$uploadedData = $form->getValues();
 				$filename = $uploadedData['eaddoc'];
+				
+				//clean up collection id if no collection is selected
+				if ($uploadedData['ead_importer_collection_id'] == 'X')
+				{
+					$collectionId = '';
+				}
+				else{
+					$collectionId = $uploadedData['ead_importer_collection_id'];
+				}
     			
     			//Save the file    			
     			$this->view->filename = $filename;		
@@ -35,7 +44,7 @@ class EadImporter_IndexController extends Omeka_Controller_Action
 						$args['filename'] = $filename;
 						$args['ead_importer_items_are_public'] = $uploadedData['ead_importer_items_are_public'];
 						$args['ead_importer_items_are_featured'] = $uploadedData['ead_importer_items_are_featured'];
-						$args['ead_importer_collection_id'] = $uploadedData['ead_importer_collection_id'];
+						$args['ead_importer_collection_id'] = $collectionId;
 						$args['filterstring'] = $uploadedData['filterstring'];
 						
     					ProcessDispatcher::startProcess('EadImporter_ProcessEad', null, $args);
@@ -60,21 +69,18 @@ class EadImporter_IndexController extends Omeka_Controller_Action
     	}
 	}
 	
-	function get_collections($params = array(), $limit = 10)
-	{
-    	return get_db()->getTable('Collection')->findBy($params, $limit);
-	}
-	
 	private function importForm($tmpdir=EAD_IMPORT_TMP_LOCATION)
 	{
 	    require "Zend/Form/Element.php";	
 
 	    //Get collections table and load into array
 	    $collections = array();
+	    $collections['X'] = 'Select Below';
 		$collectionObjects = get_db()->getTable('Collection')->findAll();
 		foreach($collectionObjects as $collectionObject) {
 			$collections[$collectionObject->id] = $collectionObject->name;
 		}
+		
 	    
     	$form = new Zend_Form();
     	$form->setAction('update');

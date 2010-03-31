@@ -4,7 +4,6 @@ class EadImporter_ProcessEad extends ProcessAbstract
 { 
 	public function run($args, $stylesheet=EAD_IMPORT_DOC_EXTRACTOR, $tmpdir=EAD_IMPORT_TMP_LOCATION, $csvfilesdir=CSV_IMPORT_CSV_FILES_DIRECTORY, $csvImportDirectory = CSV_IMPORT_DIRECTORY) 
 	{		
-       //get the xml file using $args['filename'] and process away...
 		$xp = new XsltProcessor();	
 
 		//Get variables from args array passed into detached process
