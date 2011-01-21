@@ -2,14 +2,13 @@
 
 function extract_documents(String $ead) 
 {
-	$xh = new XSLTProcessor(EAD_IMPORT_DOC_EXTRACTOR);
-	return xslt_process($xh, $ead);
+    $xh = new XSLTProcessor(EAD_IMPORT_DOC_EXTRACTOR);
+    return xslt_process($xh, $ead);
 }
 
 function extract_persons(String $ead) 
 {
-	$xh = xslt_create(EAD_IMPORT_PERSONS_EXTRACTOR);
-	return xslt_process($xh, $ead);
+    $xh = xslt_create(EAD_IMPORT_PERSONS_EXTRACTOR);
+    return xslt_process($xh, $ead);
 }
 
-?>

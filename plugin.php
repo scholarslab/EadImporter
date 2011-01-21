@@ -22,11 +22,11 @@ add_filter('admin_navigation_main', 'ead_import_admin_navigation');
 
 function ead_import_install()
 {
-	try {
-		$xh = new XSLTProcessor; // we check for the ability to use XSLT
-	} catch (Exception $e) {
-		throw new Zend_Exception("This plugin requires XSLT support");
-	}
+    try {
+        $xh = new XSLTProcessor; // we check for the ability to use XSLT
+    } catch (Exception $exception) {
+        throw new Zend_Exception("This plugin requires XSLT support");
+    }
 }
 
 /**
@@ -49,9 +49,9 @@ function ead_import_define_acl($acl)
 
 function ead_importer_admin_header($request)
 {
-	if ($request->getModuleName() == 'ead-importer') {
-		//echo js('jquery-1.4.2.min');
-		//echo js('ead_importer_main');
-		echo '<link rel="stylesheet" href="' . html_escape(css('ead_importer_main')) . '" />';
+    if ($request->getModuleName() == 'ead-importer') {
+        //echo js('jquery-1.4.2.min');
+        //echo js('ead_importer_main');
+        echo '<link rel="stylesheet" href="' . html_escape(css('ead_importer_main')) . '" />';
     }
 }
