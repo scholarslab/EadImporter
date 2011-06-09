@@ -79,4 +79,4 @@ Retrieved from "[http://omeka.org/codex/Plugins/EadImporter](http://omeka.org/co
 [1]: http://scholarslab.org/ "http://scholarslab.org/"
 [2]: http://www.scholarslab.org/wp-content/uploads/2010/07/EadImporter-1.0.zip "http://www.scholarslab.org/wp-content/uploads/2010/07/EadImporter-1.0.zip"
 [3]: http://omeka.org/codex/Plugins/CsvImport "http://omeka.org/codex/Plugins/CsvImport"
-[4]: /codex/Installing_a_Plugin "Installing a Plugin"
+[4]: http://omeka.org/codex/Installing_a_Plugin "Installing a Plugin"
