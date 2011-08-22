@@ -10,10 +10,21 @@
  * @author ajs6f
  **/
 
-define('EAD_IMPORT_DIRECTORY', dirname(__FILE__));
-define('EAD_IMPORT_TMP_LOCATION', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATOR . 'xmldump');
-define('EAD_IMPORT_DOC_EXTRACTOR', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'ead-import-documents.xsl');
-define('EAD_IMPORT_PERSONS_EXTRACTOR', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'ead-import-persons.xsl');
+if (!defined('EAD_IMPORT_DIRECTORY')) {
+    define('EAD_IMPORT_DIRECTORY', dirname(__FILE__));
+}
+
+if (!defined('EAD_IMPORT_TMP_LOCATION')) {
+    define('EAD_IMPORT_TMP_LOCATION', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATOR . 'xmldump');
+}
+
+if (!defined('EAD_IMPORT_DOC_EXTRACTOR')) {
+    define('EAD_IMPORT_DOC_EXTRACTOR', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'ead-import-documents.xsl');
+}
+
+if (!defined('EAD_IMPORT_PERSONS_EXTRACTOR')) {
+    define('EAD_IMPORT_PERSONS_EXTRACTOR', EAD_IMPORT_DIRECTORY . DIRECTORY_SEPARATOR . 'libraries' . DIRECTORY_SEPARATOR . 'ead-import-persons.xsl');
+}
 
 add_plugin_hook('install', 'ead_import_install');
 add_plugin_hook('define_acl', 'ead_import_define_acl');
